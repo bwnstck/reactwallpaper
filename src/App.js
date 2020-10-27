@@ -1,18 +1,21 @@
+import { useState } from "react";
 import Button from "./components/Button";
 import Wallpaper from "./components/Wallpaper";
 import { searchNewPicture } from "./utils/api";
 
 function App() {
+  const [wallpaper, setWallpaper] = useState(
+    "https://source.unsplash.com/random"
+  );
+
   async function getImage() {
     const randomimage = await searchNewPicture();
-    Wallpaper.imgSrc = randomimage.urls.regular;
-    return randomimage.urls.regular;
+    setWallpaper(randomimage.urls.regular);
   }
 
-  const imgUrl = "https://source.unsplash.com/random";
   return (
     <div className="container">
-      <Wallpaper imgSrc={imgUrl} />
+      <Wallpaper imgSrc={wallpaper} />
       <Button
         className="searchButton"
         buttonText={"Search"}
@@ -21,7 +24,11 @@ function App() {
           await getImage();
         }}
       />
-      <Button buttonText={"Download"} className={"downloadButton"} />
+      <Button
+        buttonText={"Download"}
+        href={wallpaper}
+        className={"downloadButton"}
+      />
     </div>
   );
 }
