@@ -1,0 +1,19 @@
+.button {
+  margin: 1rem auto;
+  padding: 0.5rem;
+
+  color: palevioletred;
+  background-color: papayawhip;
+  font-weight: 700;
+
+  border: none;
+  border-radius: 5px;
+}
+.searchButton {
+  font-size: 1.8rem;
+}
+
+.downloadButton {
+  font-size: 1rem;
+  font-weight: 500;
+}
