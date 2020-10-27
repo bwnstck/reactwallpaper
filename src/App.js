@@ -4,10 +4,12 @@ import { searchNewPicture } from "./utils/api";
 
 function App() {
   const pictureObj = searchNewPicture();
+  const randomimage = pictureObj;
 
+  console.log(randomimage.urls);
   return (
     <div className="container">
-      <Wallpaper imgSrc={pictureObj.urls.regular} />
+      <Wallpaper />
       <Button
         className="searchButton"
         buttonText={"Search"}
