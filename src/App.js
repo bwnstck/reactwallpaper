@@ -3,19 +3,22 @@ import Wallpaper from "./components/Wallpaper";
 import { searchNewPicture } from "./utils/api";
 
 function App() {
-  const pictureObj = searchNewPicture();
-  const randomimage = pictureObj;
+  async function getImage() {
+    const randomimage = await searchNewPicture();
+    Wallpaper.imgSrc = randomimage.urls.regular;
+    return randomimage.urls.regular;
+  }
 
-  console.log(randomimage.urls);
+  const imgUrl = "https://source.unsplash.com/random";
   return (
     <div className="container">
-      <Wallpaper />
+      <Wallpaper imgSrc={imgUrl} />
       <Button
         className="searchButton"
         buttonText={"Search"}
-        onClick={() => {
+        onClick={async () => {
           console.log("click");
-          searchNewPicture();
+          await getImage();
         }}
       />
       <Button buttonText={"Download"} className={"downloadButton"} />

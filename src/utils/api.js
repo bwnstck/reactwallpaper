@@ -1,8 +1,12 @@
-const accessKey = "p9C-4_bylHIUFqKm9MWtAnFJdl5fNWjBReOAuRys9gI";
+const accessKey = process.env.REACT_APP_NOT_SECRET_CODE;
 
 export const searchNewPicture = async () => {
-  const url = `https://api.unsplash.com/photos/random/?client_id=${accessKey}`;
-  const response = await fetch(url);
+  const url = `https://api.unsplash.com/photos/random`;
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Client-ID ${accessKey}`,
+    },
+  });
   const data = await response.json();
   console.log(data);
   return data;
