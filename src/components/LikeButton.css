@@ -1,0 +1,11 @@
+.likeButton {
+  background: none;
+  border: none;
+  font-size: 2rem;
+}
+
+.likeButton--favImg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}

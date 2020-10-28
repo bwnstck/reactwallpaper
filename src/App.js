@@ -11,7 +11,9 @@ function App() {
   const API_ENABLE = true;
   const [wallpaper, setWallpaper] = useState(null);
   const [imgObj, setImgObj] = useState(null);
-  const favouriteImages = JSON.parse(localStorage.getItem("favorites")) || [];
+  const [favouriteImages, setFavouriteImages] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || []
+  );
 
   useEffect(() => {
     if (API_ENABLE) {
@@ -34,46 +36,60 @@ function App() {
 
   return (
     <div className="container">
-      {wallpaper && (
-        <Wallpaper imgSrc={imgObj.urls.regular}>
-          <LikeButton
-            handleOnClick={() => {
-              try {
-                console.log("he tried");
-                if (
-                  favouriteImages.some(
-                    (favouriteImage) => favouriteImage.id === imgObj.id
-                  )
-                ) {
-                  console.log("click like");
-                } else {
-                  localStorage.setItem("favorites", JSON.stringify([imgObj]));
-                }
-              } catch (error) {
-                console.error("error", error);
-              }
-            }}
-          />
-        </Wallpaper>
-      )}
+      {wallpaper && <Wallpaper imgSrc={imgObj.urls.regular} />}
+      <LikeButton
+        handleOnClick={() => {
+          try {
+            console.log("favImages", favouriteImages);
+            if (
+              favouriteImages.some(
+                (favouriteImage) => favouriteImage.id === imgObj.id
+              )
+            ) {
+              const popImage = favouriteImages.filter(
+                (favouriteImage) => favouriteImage.id === imgObj.id
+              );
+              console.log(popImage);
+              const arrayWithoutImage = favouriteImages.filter(
+                (favouriteImage) => favouriteImage.id !== imgObj.id
+              );
+              setFavouriteImages(arrayWithoutImage);
+              localStorage.setItem(
+                "favorites",
+                JSON.stringify(arrayWithoutImage)
+              );
+              // Remove Item from local storage and update array
+            } else {
+              // Add to local Favs and to localStorage
+              const newFavsArray = [...favouriteImages, imgObj];
+              setFavouriteImages(newFavsArray);
+              localStorage.setItem("favorites", JSON.stringify(newFavsArray));
+            }
+          } catch (error) {
+            console.error("error", error);
+          }
+        }}
+      />
       <Button
         className="searchButton"
         buttonText={"Search"}
         onClick={async (event) => {
           event.stopPropagation();
           console.log("click");
-          await getImageObj();
+          setImgObj(await getImageObj());
         }}
       />
-      <DownloadForm href={wallpaper}>
-        {wallpaper && (
-          <Button
-            buttonText={"Download"}
-            className={"downloadButton"}
-            type={"submit"}
-          />
-        )}
-      </DownloadForm>
+      {imgObj && (
+        <DownloadForm href={imgObj.urls.regular}>
+          {imgObj.urls.regular && (
+            <Button
+              buttonText={"Download"}
+              className={"downloadButton"}
+              type={"submit"}
+            />
+          )}
+        </DownloadForm>
+      )}
 
       {favouriteImages.length > 0 && (
         <FavouriteImages>
