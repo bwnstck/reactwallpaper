@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import DownloadForm from "./components/DownloadForm";
 import FavouriteImages from "./components/FavouriteImages";
+import ImageFavourite from "./components/ImageFavourite";
 import LikeButton from "./components/LikeButton";
 import Wallpaper from "./components/Wallpaper";
 import { searchNewPicture } from "./utils/api";
@@ -11,8 +12,6 @@ function App() {
   const [wallpaper, setWallpaper] = useState(null);
   const [imgObj, setImgObj] = useState(null);
   const favouriteImages = JSON.parse(localStorage.getItem("favorites")) || [];
-
-  console.log(favouriteImages ? true : false);
 
   useEffect(() => {
     if (API_ENABLE) {
@@ -24,7 +23,7 @@ function App() {
       doFetch();
     }
   }, []);
-  console.log("IMGOBJ", imgObj);
+
   async function getImageObj() {
     const randomimageObj = await searchNewPicture();
     return randomimageObj;
@@ -32,17 +31,24 @@ function App() {
   // const imgSrc = "https://source.unsplash.com/random";
 
   // const imgAlt = imgObj.urls.regular;
-  let imgSrc = imgObj.urls.regular;
+
   return (
     <div className="container">
       {wallpaper && (
-        <Wallpaper imgSrc={imgSrc}>
+        <Wallpaper imgSrc={imgObj.urls.regular}>
           <LikeButton
             handleOnClick={() => {
               try {
-                if (favouriteImages.include(wallpaper))
+                console.log("he tried");
+                if (
+                  favouriteImages.some(
+                    (favouriteImage) => favouriteImage.id === imgObj.id
+                  )
+                ) {
                   console.log("click like");
-                localStorage.setItem("favorites", JSON.stringify(imgObj));
+                } else {
+                  localStorage.setItem("favorites", JSON.stringify([imgObj]));
+                }
               } catch (error) {
                 console.error("error", error);
               }
@@ -68,9 +74,13 @@ function App() {
           />
         )}
       </DownloadForm>
+
       {favouriteImages.length > 0 && (
         <FavouriteImages>
-          <div>Favourite Images</div>
+          <ImageFavourite
+            imgSrc={favouriteImages[0].urls.regular}
+            imgAlt={favouriteImages[0].alt_description}
+          ></ImageFavourite>
         </FavouriteImages>
       )}
     </div>
