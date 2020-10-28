@@ -15,7 +15,5 @@ body {
 }
 .container {
   height: 100%;
-  display: grid;
-  align-content: center;
   z-index: -7;
 }
