@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "./components/Button";
+import DownloadForm from "./components/DownloadForm";
 import Wallpaper from "./components/Wallpaper";
 import { searchNewPicture } from "./utils/api";
 
@@ -19,16 +20,19 @@ function App() {
       <Button
         className="searchButton"
         buttonText={"Search"}
-        onClick={async () => {
+        onClick={async (event) => {
+          event.stopPropagation();
           console.log("click");
           await getImage();
         }}
       />
-      <Button
-        buttonText={"Download"}
-        href={wallpaper}
-        className={"downloadButton"}
-      />
+      <DownloadForm href={wallpaper}>
+        <Button
+          buttonText={"Download"}
+          className={"downloadButton"}
+          type={"submit"}
+        />
+      </DownloadForm>
     </div>
   );
 }
