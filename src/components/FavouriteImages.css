@@ -1,0 +1,14 @@
+.favouriteImages {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  width: 100%;
+
+  align-items: center;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.favouriteImages::-webkit-scrollbar {
+  display: none;
+}

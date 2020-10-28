@@ -1,7 +1,8 @@
 .button {
   margin: 1rem auto;
   padding: 0.5rem;
-
+  width: 220px;
+  height: 50px;
   box-shadow: 0 0 10px white;
   font-weight: 700;
 
@@ -17,8 +18,6 @@
 }
 /* https://webdeasy.de/top-css-buttons/ */
 .glow-on-hover {
-  width: 220px;
-  height: 50px;
   border: none;
   outline: none;
   color: #fff;

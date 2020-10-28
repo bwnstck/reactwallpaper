@@ -1,8 +1,9 @@
 .favouriteImageContainer {
   background-color: palevioletred;
-  width: 100%;
   position: relative;
   line-height: 0;
+  flex: 0 0 auto;
+  margin: 0 1rem;
 }
 .favouriteImage {
   width: 200px;

@@ -46,10 +46,6 @@ function App() {
                 (favouriteImage) => favouriteImage.id === imgObj.id
               )
             ) {
-              const popImage = favouriteImages.filter(
-                (favouriteImage) => favouriteImage.id === imgObj.id
-              );
-              console.log(popImage);
               const arrayWithoutImage = favouriteImages.filter(
                 (favouriteImage) => favouriteImage.id !== imgObj.id
               );
@@ -93,10 +89,26 @@ function App() {
 
       {favouriteImages.length > 0 && (
         <FavouriteImages>
-          <ImageFavourite
-            imgSrc={favouriteImages[0].urls.regular}
-            imgAlt={favouriteImages[0].alt_description}
-          ></ImageFavourite>
+          {favouriteImages.map((favImage) => (
+            <ImageFavourite
+              photoId={favImage.id}
+              key={favImage.alt_description}
+              imgSrc={favImage.urls.regular}
+              imgAlt={favImage.alt_description}
+              handleOnClick={() => {
+                console.log("ivebeenclicked");
+
+                const arrayWithoutImage = favouriteImages.filter(
+                  (favouriteImage) => favouriteImage.id !== favImage.id
+                );
+                setFavouriteImages(arrayWithoutImage);
+                localStorage.setItem(
+                  "favorites",
+                  JSON.stringify(arrayWithoutImage)
+                );
+              }}
+            ></ImageFavourite>
+          ))}
         </FavouriteImages>
       )}
     </div>

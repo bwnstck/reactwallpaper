@@ -2,20 +2,18 @@ import "./ImageFavourite.css";
 import React from "react";
 import LikeButton from "./LikeButton";
 
-export default function ImageFavourite({ imgSrc, imgAlt }) {
+export default function ImageFavourite({ imgSrc, imgAlt, handleOnClick }) {
   return (
-    <div className={"favouriteImageContainer"}>
+    <div className={"favouriteImageContainer glow-on-hover"}>
       <img
-        className={"favouriteImage"}
+        className={"favouriteImage "}
         src={imgSrc}
         alt={imgAlt}
         title={imgAlt}
       ></img>
       <LikeButton
         className={"likeButton--favImg"}
-        handleOnClick={() => {
-          // localStorage.setItem("favorites", JSON.stringify([imgObj]));
-        }}
+        handleOnClick={handleOnClick}
       />
     </div>
   );
