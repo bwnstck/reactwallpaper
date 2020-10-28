@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import DownloadForm from "./components/DownloadForm";
 import Wallpaper from "./components/Wallpaper";
@@ -6,6 +6,10 @@ import { searchNewPicture } from "./utils/api";
 
 function App() {
   const [wallpaper, setWallpaper] = useState(null);
+
+  useEffect(() => {
+    getImage();
+  }, []);
 
   async function getImage() {
     const randomimage = await searchNewPicture();

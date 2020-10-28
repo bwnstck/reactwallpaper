@@ -17,6 +17,5 @@ body {
   height: 100%;
   display: grid;
   align-content: center;
-  background: url(https://source.unsplash.com/random);
   z-index: -7;
 }
