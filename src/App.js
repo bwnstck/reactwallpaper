@@ -5,9 +5,7 @@ import Wallpaper from "./components/Wallpaper";
 import { searchNewPicture } from "./utils/api";
 
 function App() {
-  const [wallpaper, setWallpaper] = useState(
-    "https://source.unsplash.com/random"
-  );
+  const [wallpaper, setWallpaper] = useState(null);
 
   async function getImage() {
     const randomimage = await searchNewPicture();
@@ -16,7 +14,7 @@ function App() {
 
   return (
     <div className="container">
-      <Wallpaper imgSrc={wallpaper} />
+      {wallpaper && <Wallpaper imgSrc={wallpaper} />}
       <Button
         className="searchButton"
         buttonText={"Search"}
@@ -27,11 +25,13 @@ function App() {
         }}
       />
       <DownloadForm href={wallpaper}>
-        <Button
-          buttonText={"Download"}
-          className={"downloadButton"}
-          type={"submit"}
-        />
+        {wallpaper && (
+          <Button
+            buttonText={"Download"}
+            className={"downloadButton"}
+            type={"submit"}
+          />
+        )}
       </DownloadForm>
     </div>
   );
