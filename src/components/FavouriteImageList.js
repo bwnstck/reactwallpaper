@@ -12,9 +12,10 @@ export default function FavouriteImages({ photoIds, setFavouriteImages }) {
           key={favImage.alt_description}
           imgSrc={favImage.urls.regular}
           imgAlt={favImage.alt_description}
+          liked={photoIds.some(
+            (favouriteImage) => favouriteImage.id === favImage.id
+          )}
           handleOnClick={() => {
-            console.log("ivebeenclicked");
-
             const arrayWithoutImage = photoIds.filter(
               (favouriteImage) => favouriteImage.id !== favImage.id
             );

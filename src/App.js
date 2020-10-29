@@ -28,6 +28,7 @@ function App() {
   useEffect(() => {
     centerScrollbar();
   }, [favouriteImages]);
+
   async function getImageObj() {
     const randomimageObj = await searchNewPicture();
     return randomimageObj;
@@ -55,7 +56,6 @@ function App() {
       <LikeButton
         handleOnClick={() => {
           try {
-            console.log("favImages", favouriteImages);
             if (
               favouriteImages.some(
                 (favouriteImage) => favouriteImage.id === imgObj.id
@@ -80,6 +80,9 @@ function App() {
             console.error("error", error);
           }
         }}
+        liked={favouriteImages.some(
+          (favouriteImage) => favouriteImage.id === imgObj.id
+        )}
       />
       {imgObj && (
         <DownloadForm href={imgObj.links.download} target="_blank">
