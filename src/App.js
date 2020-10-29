@@ -36,7 +36,8 @@ function App() {
 
   function centerScrollbar() {
     const element = document.querySelector(".favouriteImages");
-    element.scrollLeft = (element.scrollWidth - element.clientWidth) / 2;
+    element &&
+      (element.scrollLeft = (element?.scrollWidth - element?.clientWidth) / 2);
   }
 
   return (
