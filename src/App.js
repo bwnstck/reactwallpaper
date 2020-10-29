@@ -82,7 +82,7 @@ function App() {
         }}
       />
       {imgObj && (
-        <DownloadForm href={imgObj.urls.regular}>
+        <DownloadForm href={imgObj.links.download} target="_blank">
           {imgObj.urls.regular && (
             <Button
               buttonText={"Download"}
