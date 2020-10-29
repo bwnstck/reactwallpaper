@@ -7,7 +7,6 @@ import Wallpaper from "./components/Wallpaper";
 import { searchNewPicture } from "./utils/api";
 
 function App() {
-  const API_ENABLE = true;
   const [wallpaper, setWallpaper] = useState(null);
   const [imgObj, setImgObj] = useState(null);
   const [favouriteImages, setFavouriteImages] = useState(
@@ -15,14 +14,12 @@ function App() {
   );
 
   useEffect(() => {
-    if (API_ENABLE) {
-      async function doFetch() {
-        const imgObj = await getImageObj();
-        setImgObj(imgObj);
-        setWallpaper(imgObj.urls.regular);
-      }
-      doFetch();
+    async function doFetch() {
+      const imgObj = await getImageObj();
+      setImgObj(imgObj);
+      setWallpaper(imgObj.urls.regular);
     }
+    doFetch();
   }, []);
 
   useEffect(() => {
