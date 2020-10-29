@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import DownloadForm from "./components/DownloadForm";
-import FavouriteImages from "./components/FavouriteImages";
-import ImageFavourite from "./components/ImageFavourite";
+import FavouriteImageList from "./components/FavouriteImageList";
 import LikeButton from "./components/LikeButton";
 import Wallpaper from "./components/Wallpaper";
 import { searchNewPicture } from "./utils/api";
@@ -95,28 +94,10 @@ function App() {
       )}
 
       {favouriteImages.length > 0 && (
-        <FavouriteImages>
-          {favouriteImages.map((favImage) => (
-            <ImageFavourite
-              photoId={favImage.id}
-              key={favImage.alt_description}
-              imgSrc={favImage.urls.regular}
-              imgAlt={favImage.alt_description}
-              handleOnClick={() => {
-                console.log("ivebeenclicked");
-
-                const arrayWithoutImage = favouriteImages.filter(
-                  (favouriteImage) => favouriteImage.id !== favImage.id
-                );
-                setFavouriteImages(arrayWithoutImage);
-                localStorage.setItem(
-                  "favorites",
-                  JSON.stringify(arrayWithoutImage)
-                );
-              }}
-            ></ImageFavourite>
-          ))}
-        </FavouriteImages>
+        <FavouriteImageList
+          photoIds={favouriteImages}
+          setFavouriteImages={setFavouriteImages}
+        />
       )}
     </div>
   );
