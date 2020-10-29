@@ -54,6 +54,12 @@ function App() {
         }}
       />
       <LikeButton
+        liked={
+          imgObj &&
+          favouriteImages.some(
+            (favouriteImage) => favouriteImage.id === imgObj.id
+          )
+        }
         handleOnClick={() => {
           try {
             if (
@@ -80,9 +86,6 @@ function App() {
             console.error("error", error);
           }
         }}
-        liked={favouriteImages.some(
-          (favouriteImage) => favouriteImage.id === imgObj.id
-        )}
       />
       {imgObj && (
         <DownloadForm href={imgObj.links.download} target="_blank">

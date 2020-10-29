@@ -2,8 +2,11 @@
   background: none;
   border: none;
   font-size: 2rem;
-  color: red;
+
   width: 50px;
+}
+.likeButton > * {
+  color: red;
   fill: red;
 }
 
