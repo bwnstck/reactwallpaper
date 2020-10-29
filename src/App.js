@@ -26,17 +26,32 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    centerScrollbar();
+  }, [favouriteImages]);
   async function getImageObj() {
     const randomimageObj = await searchNewPicture();
     return randomimageObj;
   }
-  // const imgSrc = "https://source.unsplash.com/random";
 
-  // const imgAlt = imgObj.urls.regular;
+  function centerScrollbar() {
+    const element = document.querySelector(".favouriteImages");
+    element.scrollLeft = (element.scrollWidth - element.clientWidth) / 2;
+  }
 
   return (
     <div className="container">
       {wallpaper && <Wallpaper imgSrc={imgObj.urls.regular} />}
+
+      <Button
+        className="searchButton"
+        buttonText={"Search"}
+        onClick={async (event) => {
+          event.stopPropagation();
+          console.log("click");
+          setImgObj(await getImageObj());
+        }}
+      />
       <LikeButton
         handleOnClick={() => {
           try {
@@ -64,15 +79,6 @@ function App() {
           } catch (error) {
             console.error("error", error);
           }
-        }}
-      />
-      <Button
-        className="searchButton"
-        buttonText={"Search"}
-        onClick={async (event) => {
-          event.stopPropagation();
-          console.log("click");
-          setImgObj(await getImageObj());
         }}
       />
       {imgObj && (

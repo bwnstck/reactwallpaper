@@ -4,8 +4,8 @@
   overflow-x: auto;
   width: 100%;
 
-  align-items: center;
-
+  align-items: flex-end;
+  flex-grow: 1;
   -webkit-overflow-scrolling: touch;
 }
 
