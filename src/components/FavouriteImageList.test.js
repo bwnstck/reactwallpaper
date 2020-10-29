@@ -1485,7 +1485,7 @@ const photoArray = [
 
 it("renders multiple FavoriteImages based on photoIds", () => {
   // const photoIds = ["UjD08DRW24E", "k38v31SkZdo", "AW_P_NU9MI8"];
-  render(<FavoriteImageList photoIds={photoArray} />);
+  render(<FavoriteImageList photoIds={(photoArray, function () {})} />);
   const imageElements = screen.getAllByRole("img");
   expect(imageElements.length).toBe(photoArray.length);
 });

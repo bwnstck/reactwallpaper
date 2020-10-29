@@ -3,7 +3,7 @@ import "./FavouriteImageList.css";
 import React from "react";
 import ImageFavourite from "./ImageFavourite";
 
-export default function FavouriteImages({ photoIds, setFavouriteImages }) {
+export default function FavouriteImageList({ photoIds, setFavouriteImages }) {
   return (
     <div className={"favouriteImages"}>
       {photoIds.map((favImage) => (
